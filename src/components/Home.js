@@ -1,40 +1,15 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import * as actions from '../core/actions/home'
 
-class App extends React.Component {
-  constructor() {
-    super()
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-    this.addTodo = this.addTodo.bind(this);
-  }
-
-  increment() {
-    this.props.dispatch({
-      type: 'INC'
-    });
-  }
-
-  decrement() {
-    this.props.dispatch({
-      type: 'DEC'
-    })
-  }
-
-  addTodo(newTodo) {
-    this.props.dispatch({
-      type: 'ADD_TODO',
-      data: newTodo
-    });
-  }
-
+class Home extends React.Component {
   render() {
     return (
       <div>
-        <Counter currentValue={this.props.counter} onIncrement={this.increment}
-                                                   onDecrement={this.decrement} />
-
-        <Todos todos={this.props.todos} onAddTodo={this.addTodo} />
+        <Counter currentValue={this.props.counter} onIncrement={this.props.increment}
+                                                   onDecrement={this.props.decrement} />
+        <Todos todos={this.props.todo} onAddTodo={this.props.addTodo} />
       </div>
     )
   }
@@ -71,4 +46,7 @@ const Todos = (props) => {
   );
 }
 
-export default connect((state) => state)(App)
+export default connect(
+  (state) => state,
+  (dispatch) => bindActionCreators(actions, dispatch)
+)(Home)
