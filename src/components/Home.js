@@ -4,6 +4,25 @@ import { connect } from 'react-redux'
 import * as actions from '../core/actions/home'
 
 class Home extends React.Component {
+  
+  static get route() {
+    return {
+      method: 'GET',
+      path: '/'
+    }
+  }
+
+  static get reducers() {
+    return {
+      file: 'home',
+      functions: ['counter', 'todo']
+    }
+  }
+
+  static get isUniversal() {
+    return true
+  }
+
   render() {
     return (
       <div>

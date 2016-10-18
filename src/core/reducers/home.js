@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux'
+
 export function counter(state = 0, action) {
   switch (action.type) {
     case 'INC':
@@ -17,3 +19,8 @@ export function todo(state = [], action) {
       return state
   }
 }
+
+export default combineReducers({
+  counter,
+  todo
+})

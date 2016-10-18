@@ -1,4 +1,11 @@
 export function fullPage(options) {
+  let extra = ''
+  if (options.universal) {
+    extra = `
+      <script>window.__STATE__ = ${JSON.stringify(options.state)}</script>
+      <script src="/assets/bundle.js"></script>
+    `
+  }
   return `
     <!DOCTYPE html>
     <html>
@@ -7,8 +14,7 @@ export function fullPage(options) {
       </head>
       <body>
         <div id="root">${options.reactApp}</div>
-        <script>window.__STATE__ = ${JSON.stringify(options.state)}</script>
-        <script src="/assets/bundle.js"></script>
+        ${extra}
       </body>
     </html>
   `
